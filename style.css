@@ -1,0 +1,108 @@
+body{
+  background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+main {
+  display: flex;
+  width: 90vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background: #031A7C;
+  width: 400px;
+  height: 600px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 20px;
+  box-shadow: 0 0 10px black;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #D6A40F;
+  width: 100%;
+  height: 50px;
+  font: bold 2.5rem serif;
+  /*border-bottom: solid 5px #EEAD2D;*/
+  margin-bottom: 20px;
+}
+
+.input {
+  display: flex;
+  width: 300px;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+}
+.input input {
+  width: 200px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #1c1d24;
+  border: #D6A40F;
+  outline: 1;
+  font: bold 1.5rem serif;
+  text-align: center;
+  color:#D6A40F
+}
+
+.input label {
+  color: #D6A40F;
+  font: bold 1.5rem serif;
+}
+
+.btn {
+  width: 300px;
+  height: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200%;
+  color: #D6A40F;
+  font: bold 1.5rem serif;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  /*box-shadow: 0 0 20px #eee;*/
+  border-radius: 10px;
+}
+.btn:hover {
+  background-position: right center;
+}
+.btn {
+  background-image: linear-gradient(to left, #1c1d24 0%,  #304fa3 51%, #031A7C 100%);
+}
+
+.result{
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  width: 300px;
+  height: 150px;
+  border-radius: 5px;
+  font: italic 1.5rem serif;
+  /*box-shadow: 0px 0px 10px black;*/
+  background: linear-gradient(to right, #1c1d24 0%,  #222631 51%, #030f24 100%);;
+  color: #EEAD2D;
+  padding: 20px;
+  box-sizing: border-box;
+  user-select: none;
+}
+footer{
+  flex: center;
+  width:100;
+  text-align: center;
+  font-weight: 200;
+  font-style: italic;
+  padding: 20px;
+  color: aliceblue;
+}

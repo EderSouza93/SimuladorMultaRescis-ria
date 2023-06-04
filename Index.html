@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="Icon-Cohab.png" type="image/x-icon">
+  <title>Simulador de Multa Recisória</title>
+</head>
+<body>
+  <main>
+    <div class="container">
+        <div class="title">Simulador de Multa </div>
+        <div class="input-alugel">
+            <label class="aluguel">Valor do aluguel:</label>
+            <input type="text" size="12" onKeyUp="mascaraMoeda(this, event)" value="" id="valor-do-aluguel">
+        </div>
+        <div class="input-prazo">
+            <label class="prazo-contrato">Prazo do Contrato</label>
+            <select id="prazo-contrato">
+                <option value="365">1 ano</option>
+                <option value="730">2 anos</option>
+                <option value="1095">3 anos</option>
+                <option value="1460">4 anos</option>
+                <option value="1825">5 anos</option>
+                <option value="2190">6 anos</option>
+            </select>
+        </div>
+        <div id="input-inicio-contrato">
+            <label>Inicio do contrato:</label>
+            <input type="date" id="data-inicio">
+        </div>
+        <div id="input-previsao-saida">
+            <label>Previsão de saída:</label>
+            <input type="date" id="data-final">
+        </div>
+        <button class="btn" id="simular"><span>Simular Multa</span></button>
+
+        <div class="result" id="resultado"></div>
+    </div>
+</main>
+<footer>
+    Desenvolvido por Eder Souza para Cohab Corporate &copy;
+</footer>
+<script src="script.js"></script>
+
+</body>
+</html>
