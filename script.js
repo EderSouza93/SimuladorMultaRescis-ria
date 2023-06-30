@@ -3,8 +3,8 @@ const simularMulta = document.getElementById('simular');
 const valorAluguelInput = document.getElementById('valor-do-aluguel');
 const dataInicialInput = document.getElementById('data-inicio');
 const dataFinalInput = document.getElementById('data-final');
-const prazoContratoInput = document.getElementById('prazo-contrato')
-const resultado = document.getElementById('resultado')
+const prazoContratoInput = document.getElementById('prazo-contrato');
+const resultado = document.getElementById('resultado');
 
 //Extensão do objeto String para inverter a ordem dos caracteres
 String.prototype.reverse = function(){
@@ -69,3 +69,29 @@ function CalculoDias() {
 };
 
 simularMulta.addEventListener('click', CalculoDias);
+
+//Atalho do botão Enter 
+
+dataFinalInput.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    CalculoDias();
+  } 
+});
+
+valorAluguelInput.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    CalculoDias();
+  } 
+});
+
+dataInicialInput.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    CalculoDias();
+  } 
+});
+
+prazoContratoInput.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    CalculoDias();
+  } 
+});
