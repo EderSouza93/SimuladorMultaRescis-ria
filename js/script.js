@@ -73,3 +73,27 @@ function CalculoDias() {
 }
 
 simularMulta.addEventListener("click", CalculoDias);
+
+dataFinalInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    CalculoDias();
+  }
+});
+
+valorAluguelInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    CalculoDias();
+  }
+});
+
+dataInicialInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    CalculoDias();
+  }
+});
+
+prazoContratoInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    CalculoDias();
+  }
+});
