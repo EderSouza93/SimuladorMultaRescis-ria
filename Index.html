@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" href="Icon-Cohab.png" type="image/x-icon">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/Icon-Cohab.png" type="image/x-icon">
   <title>Simulador de Multa Recisória</title>
 </head>
 <body>
   <main>
     <div class="container">
-        <div class="title">Simulador de Multa </div>
+        <div class="title">Calculadora de Multa </div>
         <div class="input-alugel">
             <label class="aluguel">Valor do aluguel:</label>
             <input type="text" size="12" onKeyUp="mascaraMoeda(this, event)" value="" id="valor-do-aluguel">
@@ -32,7 +32,7 @@
             <input type="date" id="data-inicio">
         </div>
         <div id="input-previsao-saida">
-            <label>Previsão de saída:</label>
+            <label>Final do contrato:</label>
             <input type="date" id="data-final">
         </div>
         <button class="btn" id="simular"><span>Simular Multa</span></button>
@@ -43,7 +43,7 @@
 <footer>
     Cohab Corporate &copy;
 </footer>
-<script src="script.js"></script>
+<script src="/js/script.js"></script>
 
 </body>
 </html>
