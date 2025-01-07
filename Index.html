@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="shortcut icon" href="/img/Icon-Cohab.png" type="image/x-icon">
-  <title>Calculadora de Multa Rescisória</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Multa Rescisória</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
-<body>
-  <main>
-    <div class="container">
-        <div class="title">Calculadora de Multa </div>
-        <div class="input-alugel">
-            <label class="aluguel">Valor do aluguel:</label>
-            <input type="text" size="12" onKeyUp="mascaraMoeda(this, event)" value="" id="valor-do-aluguel">
-        </div>
-        <div class="input-prazo">
-            <label class="prazo-contrato">Vigência</label>
-            <select id="prazo-contrato">
-                <option value="365">1 ano</option>
-                <option value="730">2 anos</option>
-                <option value="1095">3 anos</option>
-                <option value="1460">4 anos</option>
-                <option value="1825">5 anos</option>
-                <option value="2190">6 anos</option>
-            </select>
-        </div>
-        <div id="input-inicio-contrato">
-            <label>Inicio do contrato:</label>
-            <input type="date" id="data-inicio">
-        </div>
-        <div id="input-previsao-saida">
-            <label>Final do contrato:</label>
-            <input type="date" id="data-final">
-        </div>
-        <button class="btn" id="simular"><span>Calcular Multa</span></button>
+<body class="bg-gradient-to-b from-gray-800 to-gray-900 min-h-screen flex flex-col">
+    <main class="flex-1 flex items-center justify-center p-4">
+        <div id="capture" class="w-full max-w-md bg-white rounded-xl shadow-2xl p-6 space-y-6">
+            <div class="text-center">
+                <h1 class="text-2xl font-bold text-blue-900">Calculadora de Multa</h1>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">Valor do aluguel:</label>
+                    <input type="text" id="valor-do-aluguel" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
 
-        <div class="result" id="resultado"></div>
-    </div>
-</main>
-<footer>
-    Cohab Corporate &copy;
-</footer>
-<script src="/js/script.js"></script>
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">Vigência</label>
+                    <select id="prazo-contrato" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="365">1 ano</option>
+                        <option value="730">2 anos</option>
+                        <option value="1095">3 anos</option>
+                        <option value="1460">4 anos</option>
+                        <option value="1825">5 anos</option>
+                        <option value="2190">6 anos</option>
+                    </select>
+                </div>
 
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">Inicio do contrato:</label>
+                    <input type="date" id="data-inicio" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">Final do contrato:</label>
+                    <input type="date" id="data-final" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <button id="simular" class="w-full bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-800 transition duration-200 font-medium">
+                    Calcular Multa
+                </button>
+                
+                <button id="screenshot" class="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition duration-200 font-medium border border-gray-300">
+                    Capturar Tela
+                </button>
+            </div>
+
+            <div id="resultado" class="p-4 bg-gray-50 rounded-lg text-gray-700 min-h-[100px] break-words"></div>
+        </div>
+    </main>
+
+    <footer class="text-center py-4 text-gray-400">
+        Cohab Corporate &copy; 2025
+    </footer>
+
+    <!-- Carrega o JavaScript depois que o DOM estiver pronto -->
+    <script src="js/script.js" defer></script>
 </body>
 </html>

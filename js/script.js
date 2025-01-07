@@ -1,99 +1,145 @@
-//selecionando os elementos HTML
-const simularMulta = document.getElementById("simular");
-const valorAluguelInput = document.getElementById("valor-do-aluguel");
-const dataInicialInput = document.getElementById("data-inicio");
-const dataFinalInput = document.getElementById("data-final");
-const prazoContratoInput = document.getElementById("prazo-contrato");
-const resultado = document.getElementById("resultado");
+// Função para verificar se todos os elementos necessários existem
+function checkElements() {
+  const elements = {
+      valorAluguel: document.getElementById('valor-do-aluguel'),
+      dataInicio: document.getElementById('data-inicio'),
+      dataFinal: document.getElementById('data-final'),
+      prazoContrato: document.getElementById('prazo-contrato'),
+      simular: document.getElementById('simular'),
+      screenshot: document.getElementById('screenshot'),
+      resultado: document.getElementById('resultado')
+  };
 
-//Extensão do objeto String para inverter a ordem dos caracteres
-String.prototype.reverse = function () {
-  return this.split("").reverse().join("");
+  // Verifica se algum elemento está faltando
+  for (const [key, element] of Object.entries(elements)) {
+      if (!element) {
+          console.error(`Elemento não encontrado: ${key}`);
+          return false;
+      }
+  }
+
+  return true;
+}
+
+// Extensão do objeto String para inverter a ordem dos caracteres
+String.prototype.reverse = function() {
+  return this.split('').reverse().join('');
 };
 
-//Função para aplicar a máscara de formatação de moeda
+// Função para aplicar a máscara de formatação de moeda
 function mascaraMoeda(campo, evento) {
-  let tecla = !evento ? window.event.keyCode : evento.which;
-  let valor = campo.value.replace(/[^\d]+/gi, "").reverse();
+  if (!campo) return;
+  
+  let tecla = (!evento) ? window.event.keyCode : evento.which;
+  let valor = campo.value.replace(/[^\d]+/gi, '').reverse();
   let resultado = "";
   let mascara = "##.###.###,##".reverse();
-  for (let x = 0, y = 0; x < mascara.length && y < valor.length; ) {
-    if (mascara.charAt(x) != "#") {
-      resultado += mascara.charAt(x);
-      x++;
-    } else {
-      resultado += valor.charAt(y);
-      y++;
-      x++;
-    }
+  
+  for (let x = 0, y = 0; x < mascara.length && y < valor.length;) {
+      if (mascara.charAt(x) != '#') {
+          resultado += mascara.charAt(x);
+          x++;
+      } else {
+          resultado += valor.charAt(y);
+          y++;
+          x++;
+      }
   }
   campo.value = resultado.reverse();
 }
 
+// Função principal para cálculo da multa
 function CalculoDias() {
-  //Manipulando os elementos HTML
-  const valorAluguel = valorAluguelInput.value;
-  const dataInicial = dataInicialInput.value;
-  const dataFinal = dataFinalInput.value;
-  const prazoContratoValor =
-    prazoContratoInput.options[prazoContratoInput.selectedIndex].value;
-  const prazoContratoTexto =
-    prazoContratoInput.options[prazoContratoInput.selectedIndex].text;
+  const valorAluguel = document.getElementById('valor-do-aluguel').value;
+  const dataInicial = document.getElementById('data-inicio').value;
+  const dataFinal = document.getElementById('data-final').value;
+  const prazoContratoInput = document.getElementById('prazo-contrato');
+  const resultado = document.getElementById('resultado');
 
-  //converte as datas para objetos
+  // Validação dos inputs
+  if (!valorAluguel || !dataInicial || !dataFinal || !prazoContratoInput || !resultado) {
+      console.error('Elementos necessários não encontrados');
+      return;
+  }
+
+  const prazoContratoValor = prazoContratoInput.options[prazoContratoInput.selectedIndex].value;
+  
+  // Conversão e cálculo das datas
   const data1 = new Date(dataFinal);
   const data2 = new Date(dataInicial);
 
-  //calcula a diferença de datas
   const diffTime = Math.abs(data2 - data1);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24) + 1);
-
-  //define os dias de não uso
   const diasNaoUso = prazoContratoValor - diffDays;
 
-  //Convertendo a String da mascara para number
-  const aluguelFormat = parseFloat(
-    valorAluguel.replace(/\./g, "").replace(",", ".")
-  );
-
-  //Calculando Multa Rescisória
+  // Conversão do valor do aluguel
+  const aluguelFormat = parseFloat(valorAluguel.replace(/\./g, '').replace(',', '.'));
   const multaRescisoria = (3 * aluguelFormat * diasNaoUso) / prazoContratoValor;
-
-  let multaRescisoriaCurrency = multaRescisoria.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
+  const multaRescisoriaCurrency = multaRescisoria.toLocaleString('pt-br', {
+      style: 'currency',
+      currency: 'BRL'
   });
-  //validando o resultado
-  if (dataFinal === "" || dataInicial === "" || valorAluguel === "")
-    resultado.textContent = "Insira dados válidos";
-  else if (diffDays >= prazoContratoValor)
-    resultado.textContent = "Esse contrato não possui multa rescisória";
-  else
-    resultado.textContent = `O inquilino utilizou ${diffDays} dias de seu contrato, gerando ${diasNaoUso} dias de não uso, incidindo uma multa rescisória de ${multaRescisoriaCurrency}.`;
+
+  // Exibição do resultado
+  if (!valorAluguel || !dataInicial || !dataFinal) {
+      resultado.textContent = 'Insira dados válidos';
+  } else if (diffDays >= prazoContratoValor) {
+      resultado.textContent = 'Esse contrato não possui multa rescisória';
+  } else {
+      resultado.textContent = `O inquilino utilizou ${diffDays} dias de seu contrato, gerando ${diasNaoUso} dias de não uso, incidindo uma multa rescisória de ${multaRescisoriaCurrency}.`;
+  }
 }
 
-simularMulta.addEventListener("click", CalculoDias);
-
-dataFinalInput.addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    CalculoDias();
+// Função para captura de tela
+function captureScreen() {
+  const element = document.getElementById('capture');
+  if (!element) {
+      console.error('Elemento para captura não encontrado');
+      return;
   }
-});
 
-valorAluguelInput.addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    CalculoDias();
-  }
-});
+  html2canvas(element).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'calculo-multa.png';
+      link.href = canvas.toDataURL();
+      link.click();
+  }).catch(err => {
+      console.error('Erro ao capturar tela:', err);
+  });
+}
 
-dataInicialInput.addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    CalculoDias();
+// Inicialização dos event listeners
+function initializeEventListeners() {
+  if (!checkElements()) {
+      console.error('Alguns elementos necessários não foram encontrados');
+      return;
   }
-});
 
-prazoContratoInput.addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    CalculoDias();
-  }
-});
+  // Event Listeners principais
+  document.getElementById('simular').addEventListener('click', CalculoDias);
+  document.getElementById('screenshot').addEventListener('click', captureScreen);
+
+  // Adiciona o evento da máscara monetária
+  const inputValorAluguel = document.getElementById('valor-do-aluguel');
+  inputValorAluguel.addEventListener('keyup', function(event) {
+      mascaraMoeda(this, event);
+  });
+
+  // Event listeners para tecla Enter
+  const elements = ['valor-do-aluguel', 'data-inicio', 'data-final', 'prazo-contrato'];
+  elements.forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+          element.addEventListener('keypress', function(e) {
+              if (e.key === 'Enter') {
+                  CalculoDias();
+              }
+          });
+      }
+  });
+
+  console.log('Event listeners inicializados com sucesso');
+}
+
+// Inicializa os event listeners quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', initializeEventListeners);
